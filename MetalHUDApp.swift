@@ -11,6 +11,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     let button = NSButton()
     let statusLabel = NSTextField()
+    let toggleLabel = NSTextField()
     var visualEffectView: NSVisualEffectView!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -80,6 +81,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         statusLabel.sizeToFit()
         statusLabel.frame = NSRect(x: 0, y: 100, width: 300, height: 50)
         
+        toggleLabel.stringValue = "Use Shift + (Fn) F9 to toggle HUD on and off ingame"
+    	toggleLabel.font = NSFont.systemFont(ofSize: 10)
+    	toggleLabel.textColor = NSColor.gray
+    	toggleLabel.alignment = .center
+    	toggleLabel.isBordered = false
+    	toggleLabel.backgroundColor = .clear
+    	toggleLabel.isEditable = false
+    	toggleLabel.isSelectable = false
+    	toggleLabel.isBezeled = false
+    	toggleLabel.sizeToFit()
+    	toggleLabel.frame = NSRect(x: 0, y: -25, width: 300, height: 50)
+        
         button.title = "OFF"
         button.frame = NSRect(x: 50, y: 50, width: 200, height: 40)
         button.wantsLayer = true
@@ -93,6 +106,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         window.contentView?.addSubview(visualEffectView)
         window.contentView?.addSubview(statusLabel)
         window.contentView?.addSubview(button)
+        window.contentView?.addSubview(toggleLabel)
     }
     
     func getEnvironmentVar(_ name: String) -> String? {
