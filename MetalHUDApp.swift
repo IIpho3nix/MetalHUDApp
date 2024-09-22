@@ -40,18 +40,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let screenSize = NSScreen.main!.frame.size
         window = NSWindow(
             contentRect: NSRect(x: (screenSize.width - 300) / 2, y: (screenSize.height - 200) / 2, width: 300, height: 200),
-            styleMask: [.titled, .closable, .resizable],
+            styleMask: [.titled, .closable, .fullSizeContentView],
             backing: .buffered,
             defer: false)
         
         window.isReleasedWhenClosed = false
-        window.title = "Metal HUD"
+        window.title = ""
         window.backgroundColor = NSColor.clear
         window.isOpaque = false
         window.level = .floating
         window.makeKeyAndOrderFront(nil)
         
         window.delegate = self
+        window.titlebarAppearsTransparent = true
         
         visualEffectView = NSVisualEffectView(frame: window.contentView!.bounds)
         visualEffectView.autoresizingMask = [.width, .height]
@@ -59,6 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         visualEffectView.blendingMode = .behindWindow
         visualEffectView.state = .active
         window.contentView?.addSubview(visualEffectView)
+        window.contentView?.addSubview(visualEffectView, positioned: .below, relativeTo: nil)
     }
     
     func windowShouldClose(_ sender: NSWindow) -> Bool {
@@ -72,6 +74,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         statusLabel.alignment = .center
         statusLabel.isBordered = false
         statusLabel.backgroundColor = .clear
+        statusLabel.isEditable = false
+    	statusLabel.isSelectable = false
+    	statusLabel.isBezeled = false
         statusLabel.sizeToFit()
         statusLabel.frame = NSRect(x: 0, y: 100, width: 300, height: 50)
         
