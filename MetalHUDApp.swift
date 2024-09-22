@@ -98,8 +98,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func loadInitialState() {
         if let value = getEnvironmentVar("MTL_HUD_ENABLED"), let intValue = Int(value) {
             isEnabled = intValue == 1
-            updateButtonState()
         }
+        updateButtonState()
     }
     
     @objc func toggleHUD() {
